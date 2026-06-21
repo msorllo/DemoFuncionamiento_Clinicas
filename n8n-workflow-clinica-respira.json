@@ -1,0 +1,233 @@
+{
+  "name": "Clínica Respira — Asistente de Reservas por Telegram",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": ["message"],
+        "additionalFields": {}
+      },
+      "id": "n1-telegram-trigger",
+      "name": "📩 Mensaje de Telegram",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [200, 300],
+      "webhookId": "clinica-respira-bot",
+      "credentials": {
+        "telegramApi": { "id": "1", "name": "Telegram Bot (Clínica Respira)" }
+      },
+      "notes": "PASO 1: Pega el TOKEN de @BotFather en las credenciales de Telegram."
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.message.chat.id }}",
+        "contextWindowLength": 10
+      },
+      "id": "n2-memory",
+      "name": "🧠 Memoria de conversación",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.2,
+      "position": [460, 480],
+      "notes": "Recuerda los últimos 10 mensajes por chat.id — imprescindible para que la IA no pregunte lo mismo dos veces."
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-3.1-8b-instruct:free",
+        "options": {
+          "temperature": 0.4,
+          "maxTokens": 800
+        }
+      },
+      "id": "n3-openrouter-model",
+      "name": "🤖 Modelo IA (OpenRouter)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [460, 160],
+      "credentials": {
+        "openAiApi": { "id": "2", "name": "OpenRouter API Key" }
+      },
+      "notes": "PASO 2: En credenciales OpenAI pon Base URL = https://openrouter.ai/api/v1 y tu OpenRouter API Key. Modelo gratuito: meta-llama/llama-3.1-8b-instruct:free"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "hasOutputParser": false,
+        "systemMessage": "# IDENTIDAD\nEres la recepcionista de Clínica Respira, una clínica de fisioterapia y osteopatía en el centro de Madrid. Tu trato es cercano, empático y muy profesional. Hablas siempre en español, con calidez y frases cortas.\n\n# REGLAS INQUEBRANTABLES\n- NUNCA digas que eres una IA, un bot o un sistema automático. Eres \"el equipo de recepción de Clínica Respira\".\n- NUNCA te inventes precios, servicios ni horas libres. Usa SIEMPRE la herramienta consultarDisponibilidad antes de afirmar disponibilidad.\n- Si un hueco está ocupado, ofrece automáticamente 3 alternativas reales en lista.\n- Para guardar la cita usa SIEMPRE la herramienta guardarCita.\n\n# SERVICIOS\n- Fisioterapia General — 45 min — 40 €\n- Osteopatía — 60 min — 55 €\n- Masaje Deportivo — 45 min — 45 €\n\n# HORARIOS\n- Lunes a viernes. Mañanas 09:00–14:00 y tardes 16:00–20:00.\n- Citas en bloques de 1 hora. Una cita por bloque — no se solapan.\n\n# FLUJO DE LA CONVERSACIÓN\n1. Saluda con calidez y pregunta qué servicio necesita.\n2. Pregunta qué día prefiere. Usa consultarDisponibilidad(fecha en formato YYYY-MM-DD).\n3. Muestra los huecos libres. Si pide uno ocupado, ofrece 3 alternativas de la lista de libres.\n4. Cuando elija hora, pide estos datos UNO A UNO: nombre completo → teléfono (imprescindible) → correo electrónico → motivo breve.\n5. Repite el resumen completo (servicio, día, hora, precio) y pide confirmación explícita.\n6. Al confirmar, usa guardarCita con todos los datos y envía confirmación cálida. Menciona que recibirá un recordatorio.\n\n# TONO\nUsa algún emoji con moderación (💚, ✅, 🙂). Nunca seas frío ni robótico. Frases cortas.",
+        "options": {}
+      },
+      "id": "n4-ai-agent",
+      "name": "💬 Asistente IA (Agente)",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "name": "consultarDisponibilidad",
+        "description": "Consulta los huecos disponibles para una fecha concreta. Devuelve lista de horas libres (formato HH:MM). Úsala SIEMPRE antes de ofrecer o confirmar una hora.",
+        "workflowId": { "__rl": true, "value": "={{ $workflow.id }}", "mode": "id" },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "fecha": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fecha', 'Fecha en formato YYYY-MM-DD', 'string') }}"
+          }
+        }
+      },
+      "id": "n5-tool-disponibilidad",
+      "name": "🔧 Tool: consultarDisponibilidad",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [700, 160],
+      "notes": "Esta tool llama al subworkflow 'Consultar disponibilidad'. Crea ese workflow por separado (ver nodos n8-n10)."
+    },
+    {
+      "parameters": {
+        "name": "guardarCita",
+        "description": "Guarda una cita confirmada en la base de datos. Requiere: fecha (YYYY-MM-DD), hora (HH:MM), servicio (fisioterapia|osteopatia|masaje), nombre, telefono, email, motivo.",
+        "workflowId": { "__rl": true, "value": "={{ $workflow.id }}", "mode": "id" },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "fecha":    "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fecha',    'Fecha YYYY-MM-DD', 'string') }}",
+            "hora":     "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('hora',     'Hora HH:MM', 'string') }}",
+            "servicio": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('servicio', 'Nombre del servicio', 'string') }}",
+            "nombre":   "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('nombre',   'Nombre completo del paciente', 'string') }}",
+            "telefono": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('telefono', 'Teléfono del paciente', 'string') }}",
+            "email":    "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('email',    'Email del paciente', 'string') }}",
+            "motivo":   "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('motivo',   'Motivo de la consulta', 'string') }}"
+          }
+        }
+      },
+      "id": "n6-tool-guardar",
+      "name": "🔧 Tool: guardarCita",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [700, 300],
+      "notes": "Esta tool llama al subworkflow 'Guardar cita'. Crea ese workflow por separado (ver nodos n11-n13)."
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('📩 Mensaje de Telegram').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "n7-telegram-reply",
+      "name": "📤 Responder por Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [720, 300],
+      "credentials": {
+        "telegramApi": { "id": "1", "name": "Telegram Bot (Clínica Respira)" }
+      }
+    },
+
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "cronExpression", "expression": "0 18 * * 1-5" }]
+        }
+      },
+      "id": "n8-recordatorio-trigger",
+      "name": "⏰ Trigger: Recordatorios (18:00 L-V)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [200, 700],
+      "notes": "Se ejecuta cada día laborable a las 18:00 para enviar recordatorios de citas de mañana."
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": { "__rl": true, "value": "TU_AIRTABLE_BASE_ID", "mode": "id" },
+        "table": { "__rl": true, "value": "Citas", "mode": "name" },
+        "filterByFormula": "AND({estado}='pendiente', DATESTR({fecha})=DATESTR(DATEADD(TODAY(), 1, 'days')))",
+        "additionalOptions": {}
+      },
+      "id": "n9-buscar-citas-manana",
+      "name": "📅 Buscar citas de mañana",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [460, 700],
+      "credentials": {
+        "airtableTokenApi": { "id": "3", "name": "Airtable API Key" }
+      },
+      "notes": "PASO 3: Crea un Personal Access Token en airtable.com/create/tokens y conéctalo aquí. Cambia TU_AIRTABLE_BASE_ID por el ID de tu base."
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.fields.telegram_chat_id }}",
+        "text": "=💚 <b>Recordatorio de tu cita</b>\n\nHola <b>{{ $json.fields.nombre }}</b>, te recordamos que mañana tienes:\n\n🗓️ <b>{{ $json.fields.servicio }}</b>\n⏰ {{ $json.fields.hora }}h\n💶 {{ $json.fields.precio }}€\n\n📍 Clínica Respira · Madrid centro\n\n¿Necesitas cambiar algo? Escríbenos y lo gestionamos al instante. ¡Hasta mañana! 😊",
+        "additionalFields": { "parse_mode": "HTML" }
+      },
+      "id": "n10-enviar-recordatorio",
+      "name": "🔔 Enviar recordatorio",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [720, 700],
+      "credentials": {
+        "telegramApi": { "id": "1", "name": "Telegram Bot (Clínica Respira)" }
+      }
+    }
+  ],
+  "connections": {
+    "📩 Mensaje de Telegram": {
+      "main": [[{ "node": "💬 Asistente IA (Agente)", "type": "main", "index": 0 }]]
+    },
+    "🧠 Memoria de conversación": {
+      "ai_memory": [[{ "node": "💬 Asistente IA (Agente)", "type": "ai_memory", "index": 0 }]]
+    },
+    "🤖 Modelo IA (OpenRouter)": {
+      "ai_languageModel": [[{ "node": "💬 Asistente IA (Agente)", "type": "ai_languageModel", "index": 0 }]]
+    },
+    "🔧 Tool: consultarDisponibilidad": {
+      "ai_tool": [[{ "node": "💬 Asistente IA (Agente)", "type": "ai_tool", "index": 0 }]]
+    },
+    "🔧 Tool: guardarCita": {
+      "ai_tool": [[{ "node": "💬 Asistente IA (Agente)", "type": "ai_tool", "index": 1 }]]
+    },
+    "💬 Asistente IA (Agente)": {
+      "main": [[{ "node": "📤 Responder por Telegram", "type": "main", "index": 0 }]]
+    },
+    "⏰ Trigger: Recordatorios (18:00 L-V)": {
+      "main": [[{ "node": "📅 Buscar citas de mañana", "type": "main", "index": 0 }]]
+    },
+    "📅 Buscar citas de mañana": {
+      "main": [[{ "node": "🔔 Enviar recordatorio", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "clinica-respira-demo"
+  },
+  "pinData": {},
+  "versionId": "1.0.0",
+  "triggerCount": 2,
+  "tags": [
+    { "createdAt": "2026-06-21", "updatedAt": "2026-06-21", "id": "1", "name": "clinica-respira" },
+    { "createdAt": "2026-06-21", "updatedAt": "2026-06-21", "id": "2", "name": "mistereia" }
+  ],
+  "__readme__": {
+    "instrucciones": [
+      "1. En n8n: Settings > Import workflow > sube este archivo JSON",
+      "2. Crea credencial 'Telegram Bot' con el TOKEN de @BotFather",
+      "3. Crea credencial 'OpenRouter API Key' (base URL: https://openrouter.ai/api/v1)",
+      "4. Crea credencial 'Airtable API Key' con tu Personal Access Token",
+      "5. En el nodo 'Buscar citas de mañana', cambia TU_AIRTABLE_BASE_ID por el ID real",
+      "6. Activa el workflow y prueba escribiendo al bot de Telegram",
+      "7. Para el subworkflow 'consultarDisponibilidad': crea un workflow que reciba 'fecha' y devuelva los huecos libres (ver código en ARQUITECTURA-N8N.md)",
+      "8. Para el subworkflow 'guardarCita': crea un workflow que reciba los datos y cree un registro en Airtable tabla 'Citas'"
+    ],
+    "creado_por": "MISTEREIA (mistereia.com)",
+    "cliente": "Demo Clínica Respira",
+    "fecha": "2026-06-21"
+  }
+}

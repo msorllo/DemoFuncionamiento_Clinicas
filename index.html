@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0C2238" />
+  <title>Clínica Respira · Fisioterapia y Osteopatía en Madrid</title>
+  <meta name="description" content="Fisioterapia, osteopatía y masaje deportivo en el centro de Madrid. Reserva online en 30 segundos, sin llamadas y con confirmación al instante." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Fraunces (display editorial) + Inter (cuerpo) -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/landing.css" />
+  <!-- Oculta los elementos animados antes del primer pintado (evita parpadeo).
+       Solo si el usuario no prefiere menos movimiento; anim.js revierte si GSAP falla. -->
+  <script>(function(){try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('anim-ready');}}catch(e){}})();</script>
+</head>
+<body>
+
+  <!-- ===================== BANNER DEMO MISTEREIA ===================== -->
+  <div class="demo-banner">
+    <span>⚡ Esta web es una <b>demo gratuita</b> creada por MISTEREIA — ¿quieres algo así para tu negocio?</span>
+    <a href="https://www.mistereia.com/#contacto" target="_blank" rel="noopener">Hablamos sin compromiso →</a>
+  </div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header" id="header">
+    <div class="container nav">
+      <a href="#inicio" class="brand">
+        <span class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-3-7-6-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 4-3 7-7 10z"/></svg>
+        </span>
+        Clínica Respira
+      </a>
+      <nav class="nav-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#metodo">Cómo funciona</a>
+        <a href="#panel">El panel</a>
+        <a href="#automatizacion">Automatización</a>
+      </nav>
+      <a href="#reservar" class="btn btn-primary">Reservar cita</a>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg-blob a"></div>
+    <div class="hero-bg-blob b"></div>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow" data-reveal="up">Fisioterapia &amp; Osteopatía · Madrid centro</span>
+        <h1 class="display" data-reveal="up">
+          El alivio que tu cuerpo<br /><span class="ital">estaba esperando.</span>
+        </h1>
+        <p class="lead" data-reveal="up">
+          Olvídate de los audios y las esperas al teléfono. Elige tu tratamiento, tu hora
+          y confirma en 30 segundos. Sin solapamientos, sin estrés.
+        </p>
+        <div class="hero-cta" data-reveal="up">
+          <a href="#reservar" class="btn btn-primary">Reservar mi cita <span class="arrow">→</span></a>
+          <a href="#servicios" class="btn btn-outline">Ver servicios</a>
+        </div>
+        <div class="hero-trust" data-reveal="up">
+          <span class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Confirmación inmediata</span>
+          <span class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Lun–Vie · 09–20h</span>
+          <span class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6z"/></svg> Profesionales colegiados</span>
+        </div>
+      </div>
+
+      <div class="hero-media" data-reveal="zoom">
+        <div class="hero-photo-frame">
+          <img src="assets/img/hero.jpg" alt="Sesión de fisioterapia en Clínica Respira" data-parallax="0.12" />
+        </div>
+        <div class="hero-chip" data-float>
+          <div>
+            <div class="stars">★★★★★</div>
+            <b>4,9</b><small>+200 reseñas</small>
+          </div>
+        </div>
+        <div class="hero-badge" data-float>
+          <div class="hb-top">
+            <div class="hb-check">✓</div>
+            <div><div class="hb-t">Cita confirmada</div><div class="hb-s">Te esperamos, Lucía 👋</div></div>
+          </div>
+          <div class="hb-row"><span>Fisioterapia</span><span>Hoy · 10:00</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STATS ===================== -->
+  <section class="stats-band">
+    <div class="container stats-grid">
+      <div class="stat" data-reveal="up"><div class="num"><span data-count="24">0</span><span class="suf">/7</span></div><div class="lbl">Reservas online, día y noche</div></div>
+      <div class="stat" data-reveal="up"><div class="num"><span data-count="30">0</span><span class="suf">s</span></div><div class="lbl">Para reservar una cita</div></div>
+      <div class="stat" data-reveal="up"><div class="num"><span data-count="0">0</span></div><div class="lbl">Citas solapadas, garantizado</div></div>
+      <div class="stat" data-reveal="up"><div class="num"><span class="suf">−</span><span data-count="90">0</span><span class="suf">%</span></div><div class="lbl">Ausencias con recordatorios</div></div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICIOS ===================== -->
+  <section class="section" id="servicios">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow" data-reveal="up">Nuestros tratamientos</span>
+        <h2 class="display" data-reveal="up">Manos expertas para cada necesidad</h2>
+        <p class="lead" data-reveal="up" style="margin-left:auto;margin-right:auto">Tres tratamientos diseñados para aliviar tu dolor y devolverte la movilidad.</p>
+      </div>
+      <div class="services-grid" id="servicesGrid"><!-- generado por landing.js --></div>
+    </div>
+  </section>
+
+  <!-- ===================== MÉTODO ===================== -->
+  <section class="section bg-soft" id="metodo">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow" data-reveal="up">Así de fácil</span>
+        <h2 class="display" data-reveal="up">Tu cita en tres pasos</h2>
+      </div>
+      <div class="method-grid">
+        <div class="method-step" data-reveal="up">
+          <div class="num">01</div>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <h4>Reservas en 30 segundos</h4>
+          <p>Eliges servicio y un hueco realmente libre. Sin llamadas, sin audios, a cualquier hora.</p>
+        </div>
+        <div class="method-step" data-reveal="up">
+          <div class="num">02</div>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+          <h4>Recordatorio automático</h4>
+          <p>Te avisamos por WhatsApp antes de tu cita para que no se te olvide. Adiós a las ausencias.</p>
+        </div>
+        <div class="method-step" data-reveal="up">
+          <div class="num">03</div>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-3-7-6-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 4-3 7-7 10z"/></svg></div>
+          <h4>Tu tratamiento</h4>
+          <p>Llegas, te atendemos con calma y tu agenda queda siempre perfectamente cuadrada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANEL (SECCIÓN NUEVA 1) ===================== -->
+  <section class="section" id="panel">
+    <div class="container">
+      <div class="showcase">
+        <div class="showcase-body" data-reveal="up">
+          <span class="eyebrow">Para el equipo de la clínica</span>
+          <h2 class="display" style="margin-top:16px">Toda tu consulta,<br />bajo control</h2>
+          <p class="lead" style="margin-top:16px">Mientras tus pacientes reservan desde el móvil, tú lo ves todo ordenado en un panel privado. Sin papeles, sin solapamientos, sin sorpresas.</p>
+          <ul class="feat-list">
+            <li><span class="tick">✓</span> Citas de <b>hoy</b> y <b>próximos días</b> de un vistazo, con nombre, servicio, hora y teléfono.</li>
+            <li><span class="tick">✓</span> Marca cada cita como <b>completada</b> o <b>cancelada</b> en un toque.</li>
+            <li><span class="tick">✓</span> Llama o escribe por WhatsApp al paciente directamente desde su ficha.</li>
+            <li><span class="tick">✓</span> Ingresos estimados del día calculados automáticamente.</li>
+          </ul>
+          <a href="dashboard.html" class="btn btn-dark">Ver el panel en vivo <span class="arrow">→</span></a>
+        </div>
+        <div class="showcase-visual" data-reveal="zoom">
+          <a href="dashboard.html" class="mockup mockup-live" style="display:block" title="Abrir el panel">
+            <div class="mockup-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">clinica-respira.es/panel</span></div>
+            <div class="mockup-live">
+              <span class="live-tag"><span class="pulse"></span> EN VIVO</span>
+              <iframe src="dashboard.html" title="Panel del dueño" loading="lazy" style="width:100%;height:430px;border:0;pointer-events:none;background:#0A1626"></iframe>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AUTOMATIZACIÓN (SECCIÓN NUEVA 2) ===================== -->
+  <section class="section bg-soft" id="automatizacion">
+    <div class="container">
+      <div class="showcase reverse">
+        <div class="showcase-body" data-reveal="up">
+          <span class="eyebrow">Recepción 24/7</span>
+          <h2 class="display" style="margin-top:16px">Un recepcionista que<br />nunca duerme</h2>
+          <p class="lead" style="margin-top:16px">Un asistente inteligente atiende a tus pacientes por WhatsApp o Telegram, cuadra la agenda sin solaparse y guarda cada cita solo. Tú, mientras tanto, tratas a quien tienes delante.</p>
+          <ul class="feat-list">
+            <li><span class="tick">✓</span> Responde al instante, a cualquier hora, con un trato cercano y profesional.</li>
+            <li><span class="tick">✓</span> Si una hora está ocupada, ofrece <b>3 alternativas</b> automáticamente.</li>
+            <li><span class="tick">✓</span> Recoge nombre, teléfono y motivo, y lo guarda en tu agenda.</li>
+            <li><span class="tick">✓</span> Construido con herramientas <b>100% gratuitas</b> (n8n + IA).</li>
+          </ul>
+          <a href="arquitectura.html" class="btn btn-dark">Cómo funciona la automatización <span class="arrow">→</span></a>
+        </div>
+        <div class="showcase-visual" data-reveal="zoom">
+          <div class="chat">
+            <div class="chat-head">
+              <div class="av">🫁</div>
+              <div><div class="nm">Clínica Respira</div><div class="on">en línea</div></div>
+            </div>
+            <div class="bubble in" data-chat>Hola, me gustaría una cita de fisioterapia para mañana 🙂</div>
+            <div class="bubble out" data-chat>¡Claro! Para mañana tengo estos huecos libres:</div>
+            <div class="bubble slots" data-chat><span>09:00</span><span>11:00</span><span>13:00</span></div>
+            <div class="bubble in" data-chat>Las 11:00 me viene genial</div>
+            <div class="bubble out" data-chat>Perfecto ✅ ¿Me dices tu nombre y un teléfono de contacto?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RESERVA (se conserva la funcionalidad) ===================== -->
+  <section class="section" id="reservar">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow" data-reveal="up">Reserva tu cita</span>
+        <h2 class="display" data-reveal="up">Tres pasos y listo</h2>
+        <p class="lead" data-reveal="up" style="margin-left:auto;margin-right:auto">Elige servicio, elige hora y déjanos tus datos. Recibirás la confirmación al instante.</p>
+      </div>
+
+      <div class="booking-wrap" data-reveal="up">
+        <aside class="booking-aside">
+          <h3>Tu bienestar empieza aquí</h3>
+          <p>Reservar con nosotros es rápido, claro y sin compromiso. Cambia o cancela tu cita cuando quieras.</p>
+          <ul>
+            <li><span class="tick">✓</span> Atención personalizada y cercana</li>
+            <li><span class="tick">✓</span> Profesionales colegiados</li>
+            <li><span class="tick">✓</span> En pleno centro de Madrid</li>
+            <li><span class="tick">✓</span> Recordatorio por WhatsApp</li>
+          </ul>
+        </aside>
+
+        <div class="booking-form">
+          <div class="steps" id="steps">
+            <div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div>
+          </div>
+
+          <!-- PASO 1 -->
+          <div class="step active" data-step="1">
+            <div class="field">
+              <label>1. ¿Qué tratamiento necesitas?</label>
+              <div class="service-picker" id="servicePicker"></div>
+            </div>
+            <button class="btn btn-primary btn-block" id="toStep2" disabled>Continuar <span class="arrow">→</span></button>
+          </div>
+
+          <!-- PASO 2 -->
+          <div class="step" data-step="2">
+            <div class="field">
+              <label>2. Elige el día <span class="hint">(lunes a viernes)</span></label>
+              <div class="day-picker" id="dayPicker"></div>
+            </div>
+            <div class="field">
+              <label>Elige la hora <span class="hint">· solo se muestran los huecos libres</span></label>
+              <div id="slotsContainer"></div>
+            </div>
+            <div class="form-nav">
+              <button class="btn btn-back" data-back="1">← Atrás</button>
+              <button class="btn btn-primary" id="toStep3" disabled>Continuar <span class="arrow">→</span></button>
+            </div>
+          </div>
+
+          <!-- PASO 3 -->
+          <div class="step" data-step="3">
+            <div class="summary-box" id="summaryBox"></div>
+            <div class="field">
+              <label for="f-nombre">Nombre completo</label>
+              <input type="text" id="f-nombre" placeholder="Ej. Lucía Fernández" autocomplete="name" />
+              <div class="error-msg" data-for="f-nombre">Por favor, escribe tu nombre.</div>
+            </div>
+            <div class="field">
+              <label for="f-telefono">Teléfono <span class="hint">· obligatorio</span></label>
+              <input type="tel" id="f-telefono" placeholder="Ej. +34 612 345 678" autocomplete="tel" />
+              <div class="error-msg" data-for="f-telefono">Necesitamos un teléfono válido para confirmarte la cita.</div>
+            </div>
+            <div class="field">
+              <label for="f-email">Correo electrónico</label>
+              <input type="email" id="f-email" placeholder="tucorreo@email.com" autocomplete="email" />
+              <div class="error-msg" data-for="f-email">Revisa el formato del correo.</div>
+            </div>
+            <div class="field">
+              <label for="f-motivo">Motivo de la consulta</label>
+              <textarea id="f-motivo" rows="3" placeholder="Cuéntanos brevemente qué te ocurre..."></textarea>
+            </div>
+            <div class="form-nav">
+              <button class="btn btn-back" data-back="2">← Atrás</button>
+              <button class="btn btn-primary" id="confirmBtn">Confirmar cita ✓</button>
+            </div>
+          </div>
+
+          <!-- PASO 4 -->
+          <div class="step" data-step="4">
+            <div class="confirm-screen">
+              <div class="cs-check">✓</div>
+              <h3>¡Cita confirmada!</h3>
+              <p id="confirmName">Te esperamos.</p>
+              <div class="confirm-detail" id="confirmDetail"></div>
+              <p class="hint" style="font-size:.85rem">📲 Te enviaremos un recordatorio antes de tu cita.</p>
+              <button class="btn btn-primary btn-block" id="newBooking" style="margin-top:18px">Reservar otra cita</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="section bg-soft">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow" data-reveal="up">Dudas frecuentes</span>
+        <h2 class="display" data-reveal="up">Preguntas habituales</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item" data-reveal="up">
+          <button class="faq-q">¿Cómo sé que mi cita ha quedado reservada? <span class="pm">+</span></button>
+          <div class="faq-a"><p>En cuanto confirmas, ves la confirmación en pantalla al instante y la cita queda bloqueada para ti. Además, recibirás un recordatorio por WhatsApp antes de tu visita.</p></div>
+        </div>
+        <div class="faq-item" data-reveal="up">
+          <button class="faq-q">¿Puedo cambiar o cancelar mi cita? <span class="pm">+</span></button>
+          <div class="faq-a"><p>Sí, sin compromiso. Escríbenos por WhatsApp y reorganizamos tu cita. El hueco que liberes vuelve a estar disponible automáticamente para otros pacientes.</p></div>
+        </div>
+        <div class="faq-item" data-reveal="up">
+          <button class="faq-q">¿Qué pasa si la hora que quiero está ocupada? <span class="pm">+</span></button>
+          <div class="faq-a"><p>El sistema solo te muestra huecos realmente libres, así que es imposible que se solapen dos citas. Si tu hora ideal no aparece, te proponemos las más cercanas disponibles.</p></div>
+        </div>
+        <div class="faq-item" data-reveal="up">
+          <button class="faq-q">¿Tengo que registrarme o descargar algo? <span class="pm">+</span></button>
+          <div class="faq-a"><p>No. Reservas directamente desde la web en menos de un minuto. Solo necesitamos tu nombre, un teléfono de contacto y el motivo de tu consulta.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA FINAL ===================== -->
+  <section class="section bg-navy cta-final">
+    <div class="cta-art" style="background-image:url('assets/img/arte-respira.png')"></div>
+    <div class="container">
+      <span class="eyebrow" data-reveal="up">Empieza hoy</span>
+      <h2 class="display" data-reveal="up" style="margin-top:16px">¿List@ para sentirte mejor?</h2>
+      <p class="lead" data-reveal="up">Tu cuerpo te lo agradecerá. Reserva tu cita en 30 segundos.</p>
+      <a href="#reservar" class="btn btn-primary" data-reveal="up">Reservar mi cita <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- ===================== CTA MISTEREIA ===================== -->
+  <section class="section mistereia-cta">
+    <div class="container" style="max-width:720px;text-align:center">
+      <span class="mist-badge" data-reveal="up">Creado por MISTEREIA</span>
+      <h2 class="display" data-reveal="up" style="margin-top:20px;font-size:clamp(1.7rem,4vw,2.6rem)">¿Quieres esto<br />para tu negocio?</h2>
+      <p class="lead" data-reveal="up" style="margin:18px auto 10px">Lo que acabas de ver — la web, el panel de gestión y el asistente automático — es exactamente el tipo de sistemas que <b>MISTEREIA</b> construye para negocios como el tuyo.</p>
+      <p class="lead" data-reveal="up" style="margin:0 auto 32px;font-size:1rem;opacity:.8">Hacemos que la IA trabaje para ti: webs con reservas, automatizaciones n8n y asistentes con el ADN de tu empresa. A precios que no te van a sorprender (mal).</p>
+      <div class="mist-cta-btns" data-reveal="up">
+        <a href="https://www.mistereia.com/#contacto" target="_blank" rel="noopener" class="btn btn-primary">Quiero esto para mi negocio <span class="arrow">→</span></a>
+        <a href="https://www.mistereia.com" target="_blank" rel="noopener" class="btn btn-ghost">Ver más proyectos</a>
+      </div>
+      <p class="mist-sub" data-reveal="up">Presupuesto sin compromiso · Respuesta en menos de 24h</p>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-3-7-6-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 4-3 7-7 10z"/></svg></span>
+          Clínica Respira
+        </div>
+        <p style="margin-top:14px; font-size:.92rem; max-width:300px; color:rgba(255,255,255,0.65)">Fisioterapia y osteopatía avanzada en el corazón de Madrid. Cuidamos de tu cuerpo para que tú cuides de tu vida.</p>
+      </div>
+      <div>
+        <h5>Clínica</h5>
+        <ul>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#metodo">Cómo funciona</a></li>
+          <li><a href="#reservar">Reservar cita</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Sistema</h5>
+        <ul>
+          <li><a href="dashboard.html">Panel del personal</a></li>
+          <li><a href="arquitectura.html">La automatización</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li>📍 Madrid centro</li>
+          <li>🕐 Lun–Vie · 09–14h y 16–20h</li>
+          <li>📞 +34 910 000 000</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Clínica Respira · Demo de presentación</span>
+      <span class="footer-credit">Demo creada por <a href="https://www.mistereia.com/#contacto" target="_blank" rel="noopener"><b>MISTEREIA</b></a> · <a href="https://www.mistereia.com/#contacto" target="_blank" rel="noopener" style="text-decoration:underline">¿quieres algo así?</a></span>
+    </div>
+  </footer>
+
+  <!-- Botón flotante -->
+  <a href="#reservar" class="float-cta" id="floatCta">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+    Reservar cita
+  </a>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- Librerías de animación (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lógica del proyecto -->
+  <script src="js/store.js"></script>
+  <script src="js/landing.js"></script>
+  <script src="js/anim.js"></script>
+</body>
+</html>

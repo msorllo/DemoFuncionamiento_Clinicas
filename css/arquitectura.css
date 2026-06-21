@@ -1,0 +1,101 @@
+/* ============================================================================
+   CLÍNICA RESPIRA · arquitectura.css
+   Página visual que explica la automatización (n8n + IA) para gente NO técnica.
+   Reutiliza los tokens de landing.css. Aquí solo lo específico de esta página.
+   ============================================================================ */
+
+/* ---- Hero de la página ---------------------------------------------------- */
+.arq-hero {
+  position: relative; overflow: hidden; color: #fff;
+  padding: 150px 0 96px; background: var(--grad-navy);
+}
+.arq-hero .art {
+  position: absolute; inset: 0; background: url('../assets/img/arte-respira.png') center/cover no-repeat;
+  opacity: 0.4; z-index: 0; mix-blend-mode: screen;
+}
+.arq-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,23,38,0.2), rgba(8,23,38,0.85)); z-index: 1; }
+.arq-hero .container { position: relative; z-index: 2; max-width: 800px; text-align: center; }
+.arq-hero h1 { color: #fff; margin: 20px 0 22px; }
+.arq-hero .lead { margin: 0 auto; }
+.arq-hero .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 30px; }
+.arq-hero .hero-tags span { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 999px; font-size: 0.84rem; }
+
+/* ---- Antes / Después ------------------------------------------------------ */
+.compare { display: grid; gap: 20px; }
+.compare-card { border-radius: var(--r-lg); padding: 32px; border: 1px solid var(--line); }
+.compare-card.before { background: #FFF6F5; border-color: #FAD9D6; }
+.compare-card.after { background: #F1FBF8; border-color: #BFEFE2; }
+.compare-card .tag { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.8rem; letter-spacing: .06em; text-transform: uppercase; padding: 6px 13px; border-radius: 999px; }
+.compare-card.before .tag { background: #FBE0DD; color: #C0392B; }
+.compare-card.after .tag { background: #C9F2E6; color: #18876C; }
+.compare-card h3 { font-family: var(--font-display); font-size: 1.4rem; margin: 18px 0 14px; }
+.compare-card ul { list-style: none; display: grid; gap: 12px; }
+.compare-card li { display: flex; gap: 11px; align-items: flex-start; font-size: 0.96rem; color: var(--ink-soft); }
+.compare-card li .i { flex-shrink: 0; font-size: 1rem; }
+@media (min-width: 820px) { .compare { grid-template-columns: 1fr 1fr; gap: 26px; } }
+
+/* ---- Flujo (el corazón visual) ------------------------------------------- */
+.flow { position: relative; margin-top: 20px; }
+.flow-track { display: grid; gap: 24px; position: relative; }
+
+/* Línea de progreso */
+.flow-line { position: absolute; left: 38px; top: 30px; bottom: 30px; width: 3px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.flow-line-fill { position: absolute; top: 0; left: 0; width: 100%; height: 0%; background: var(--grad-mint); }
+
+.flow-node {
+  display: grid; grid-template-columns: 78px 1fr; gap: 20px; align-items: start;
+  position: relative; z-index: 2;
+}
+.flow-ic {
+  width: 78px; height: 78px; border-radius: 22px; display: grid; place-items: center; font-size: 2rem;
+  background: #fff; border: 1.5px solid var(--line); box-shadow: var(--sh-sm); position: relative;
+}
+.flow-node.active .flow-ic { border-color: var(--mint-500); box-shadow: var(--sh-mint); }
+.flow-ic .step-tag {
+  position: absolute; top: -10px; left: -10px; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--navy-800); color: #fff; display: grid; place-items: center; font-size: 0.84rem; font-weight: 700; font-family: var(--font-body);
+}
+.flow-card {
+  background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px 26px; box-shadow: var(--sh-xs);
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s;
+}
+.flow-node.active .flow-card { border-color: var(--mint-300); box-shadow: var(--sh-sm); transform: translateX(4px); }
+.flow-card h4 { font-size: 1.18rem; margin-bottom: 7px; }
+.flow-card h4 .who { display: block; font-size: 0.74rem; text-transform: uppercase; letter-spacing: .08em; color: var(--mint-600); font-weight: 700; margin-bottom: 5px; }
+.flow-card p { color: var(--ink-soft); font-size: 0.95rem; }
+.flow-card .example { margin-top: 12px; background: var(--paper-2); border-radius: 12px; padding: 12px 15px; font-size: 0.88rem; font-style: italic; color: var(--ink); border-left: 3px solid var(--mint-400); }
+
+@media (min-width: 760px) {
+  .flow-line { left: 50%; transform: translateX(-50%); }
+  .flow-track { gap: 30px; }
+  .flow-node { grid-template-columns: 1fr 78px 1fr; align-items: center; }
+  .flow-node .flow-ic { grid-column: 2; margin: 0 auto; }
+  .flow-node:nth-child(odd) .flow-card { grid-column: 1; grid-row: 1; }
+  .flow-node:nth-child(odd) .flow-ic { grid-column: 2; grid-row: 1; }
+  .flow-node:nth-child(even) .flow-card { grid-column: 3; grid-row: 1; }
+  .flow-node:nth-child(even) .flow-ic { grid-column: 2; grid-row: 1; }
+  .flow-node:nth-child(odd) .flow-card { text-align: right; }
+  .flow-node:nth-child(odd) .flow-card .example { border-left: none; border-right: 3px solid var(--mint-400); }
+}
+
+/* ---- Las piezas (ingredientes) ------------------------------------------- */
+.pieces-grid { display: grid; gap: 18px; }
+.piece { background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 26px; box-shadow: var(--sh-xs); transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+.piece:hover { transform: translateY(-6px); box-shadow: var(--sh-sm); }
+.piece .p-ic { width: 54px; height: 54px; border-radius: 15px; background: var(--paper-2); display: grid; place-items: center; font-size: 1.6rem; margin-bottom: 16px; }
+.piece h4 { font-size: 1.1rem; }
+.piece .role { font-size: 0.78rem; color: var(--mint-600); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin: 4px 0 10px; }
+.piece p { color: var(--ink-soft); font-size: 0.92rem; }
+.piece .free { display: inline-block; margin-top: 14px; background: rgba(52,212,183,0.14); color: var(--mint-600); font-weight: 600; font-size: 0.78rem; padding: 5px 12px; border-radius: 999px; }
+@media (min-width: 680px) { .pieces-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .pieces-grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* ---- Banda de beneficio económico ---------------------------------------- */
+.benefit { text-align: center; }
+.benefit .big { font-family: var(--font-display); font-size: clamp(3rem, 9vw, 5.5rem); color: var(--mint-400); line-height: 1; }
+.benefit .big .cur { font-size: 0.5em; vertical-align: super; }
+.benefit p.sub { color: rgba(255,255,255,0.78); max-width: 540px; margin: 18px auto 0; }
+
+/* ---- Mini nav de la página ------------------------------------------------ */
+.arq-back { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-soft); font-size: 0.92rem; font-weight: 500; }
+.arq-back:hover { color: var(--mint-600); }

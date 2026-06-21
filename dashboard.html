@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0A1626" />
+  <title>Panel · Clínica Respira</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+  <!-- ===================== BARRA SUPERIOR ===================== -->
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="tb-brand">
+        <span class="logo">🫁</span>
+        <div>
+          Clínica Respira
+          <small>Panel del personal</small>
+        </div>
+      </div>
+      <div class="tb-right">
+        <div class="tb-clock">
+          <strong id="clockDate">—</strong>
+          <span id="clockTime">—</span>
+        </div>
+        <a href="index.html" class="tb-link">🌐 Ver web</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- Encabezado + KPIs -->
+    <div class="page-head">
+      <h1>Hola de nuevo 👋</h1>
+      <p>Este es el resumen de tu agenda. Gestiona las citas de un vistazo.</p>
+    </div>
+
+    <section class="kpis" id="kpis"><!-- generado por JS --></section>
+
+    <div class="demo-note">
+      🔒 <span>Demo: en producción este panel estaría protegido con contraseña. Los datos se guardan en este navegador.</span>
+      <button class="reset" id="resetBtn">↺ Reiniciar datos demo</button>
+    </div>
+
+    <!-- Pestañas -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="hoy">Hoy <span class="badge" id="badgeHoy">0</span></button>
+      <button class="tab" data-tab="proximos">Próximos días <span class="badge" id="badgeProx">0</span></button>
+    </nav>
+
+    <!-- Vista HOY -->
+    <section id="vistaHoy">
+      <div class="cards" id="cardsHoy"></div>
+      <div class="empty hidden" id="emptyHoy">
+        <div class="em-ic">☕</div>
+        <h3>No hay citas para hoy</h3>
+        <p>Cuando un paciente reserve desde la web, aparecerá aquí al instante.</p>
+      </div>
+    </section>
+
+    <!-- Vista PRÓXIMOS -->
+    <section id="vistaProximos" class="hidden">
+      <div id="groupsProximos"></div>
+      <div class="empty hidden" id="emptyProx">
+        <div class="em-ic">🗓️</div>
+        <h3>No hay citas próximas</h3>
+        <p>Tu agenda de los próximos días está despejada.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    Clínica Respira · Panel de demostración · <a href="index.html">Volver a la web pública</a>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/store.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
